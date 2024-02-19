@@ -1,8 +1,10 @@
 import BgArrow from "@/components/shared/bg-arrow";
-import { blogs } from "@/constants";
 import BlogCard from "@/components/card/blog";
+import { getBlogs } from "@/service/blog.service";
 
-const HomePage = () => {
+async function HomePage() {
+  const blogs = await getBlogs();
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="relative min-h-[60vh] flex items-center justify-center">
@@ -22,6 +24,6 @@ const HomePage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HomePage;

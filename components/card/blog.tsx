@@ -4,7 +4,8 @@ import Image from "next/image";
 import React from "react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, getReadingTime } from "@/lib/utils";
+import { format } from "date-fns";
 
 interface Props extends IBlog {
   isVertical?: boolean;
@@ -21,7 +22,7 @@ const BlogCard = (blog: Props) => {
     >
       <div className="relative bg-secondary rounded-md">
         <Image
-          src={blog.image}
+          src={blog.image.url}
           width={650}
           height={335}
           alt={blog.title}
@@ -33,12 +34,12 @@ const BlogCard = (blog: Props) => {
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             <CalendarDays className="w-5 h-5" />
-            <p>{blog.date}</p>
+            <p>{format(new Date(blog.createdAt), "MMM dd, yyyy")}</p>
           </div>
           <Minus />
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5" />
-            <p>01 min read</p>
+            <p>{getReadingTime(blog.content.hmtl || "02")} min read</p>
           </div>
         </div>
 
@@ -52,17 +53,17 @@ const BlogCard = (blog: Props) => {
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <Image
-              src={"/author/thomas-macaulay.jpg"}
+              src={blog.author.avatar.url}
               alt="author"
               width={30}
               height={30}
               className="object-cover rounded-sm"
             />
-            <p>by {blog.author}</p>
+            <p>by {blog.author.name}</p>
           </div>
           <Dot />
           <div className="flex items-center gap-2">
-            <Badge variant={"secondary"}>Machine learning</Badge>
+            <Badge variant={"secondary"}>{blog.tag.name}</Badge>
           </div>
         </div>
       </div>
