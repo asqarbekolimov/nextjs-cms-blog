@@ -30,6 +30,7 @@ export const getBlogs = async () => {
         content {
           html
         }
+        slug
       }
     }
   `;
@@ -41,4 +42,36 @@ export const getBlogs = async () => {
     console.error("GraphQL request error:", error);
     throw error; // Rethrow the error to propagate it further if needed
   }
+};
+
+export const getDetailBlog = async (slug: string) => {
+  const query = gql`
+    query MyQuery($slug: String!) {
+      blog(where: { slug: $slug }) {
+        id
+        title
+        author {
+          name
+          bio
+          avatar {
+            url
+          }
+        }
+        content {
+          html
+        }
+        createdAt
+        image {
+          url
+        }
+        slug
+        tag {
+          name
+          slug
+        }
+      }
+    }
+  `;
+  const { blog } = await request<{ blog: IBlog }>(graphqlAPI, query, { slug });
+  return blog;
 };

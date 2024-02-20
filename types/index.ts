@@ -15,12 +15,14 @@ export interface IBlog {
   };
   createdAt: string;
   content: {
-    hmtl: string;
+    html: string;
   };
+  slug: string;
 }
 
 export interface IAuthor {
   name: string;
+  bio: string;
   avatar: {
     url: string;
   };
