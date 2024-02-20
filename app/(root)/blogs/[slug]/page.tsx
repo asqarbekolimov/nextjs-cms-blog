@@ -21,7 +21,6 @@ import { format } from "date-fns";
 
 async function SlugPage({ params }: { params: { slug: string } }) {
   const blog = await getDetailBlog(params.slug);
-  console.log(blog);
 
   return (
     <div className="pt-[15vh] max-w-5xl mx-auto">

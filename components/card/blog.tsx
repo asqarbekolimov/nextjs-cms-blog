@@ -1,6 +1,6 @@
 "use client";
 import { IBlog } from "@/types";
-import { CalendarDays, Clock, Dot, Minus } from "lucide-react";
+import { CalendarDays, Clock, Dot, Layers2, Minus, Tag } from "lucide-react";
 import Image from "next/image";
 import React, { MouseEvent } from "react";
 import { Badge } from "../ui/badge";
@@ -70,7 +70,16 @@ const BlogCard = (blog: Props) => {
           <Dot />
           <div className="flex items-center gap-2">
             <Link href={`/tags/${blog.tag.slug}`}>
-              <Badge variant={"secondary"}>{blog.tag.name}</Badge>
+              <Badge variant={"secondary"}>
+                <Tag className="w-3 h-3 me-2" />
+                {blog.tag.name}
+              </Badge>
+            </Link>
+            <Link href={`/categories/${blog.category?.slug}`}>
+              <Badge variant={"outline"}>
+                <Layers2 className="w-3 h-3 me-2" />
+                {blog.category?.name}
+              </Badge>
             </Link>
           </div>
         </div>
