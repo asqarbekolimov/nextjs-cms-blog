@@ -22,10 +22,12 @@ export interface IBlog {
 
 export interface IAuthor {
   name: string;
+  id: string;
   bio: string;
   avatar: {
     url: string;
   };
+  blogs: IBlog[];
 }
 
 export interface ICategoryAndTags {

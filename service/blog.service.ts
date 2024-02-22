@@ -53,6 +53,7 @@ export const getDetailBlog = async (slug: string) => {
         author {
           name
           bio
+          id
           avatar {
             url
           }
