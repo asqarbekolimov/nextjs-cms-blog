@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { ChangeEvent, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -10,13 +11,36 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-import { Minus, Search } from "lucide-react";
+import { Loader2, Minus, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { popularCategories, popularTags } from "@/constants";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { IBlog } from "@/types";
+import { getSearchBlog } from "@/service/blog.service";
+import { debounce } from "lodash";
+import SearchCard from "@/components/card/search";
+import { Separator } from "@/components/ui/separator";
 
 function GlobalSearch() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [blogs, setBlogs] = useState<IBlog[]>([]);
+
+  const handleSearch = async (e: ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value.toLocaleLowerCase();
+    if (text && text.length > 2) {
+      setIsLoading(true);
+      const data = await getSearchBlog(text);
+      setBlogs(data);
+      setIsLoading(false);
+    } else {
+      setBlogs([]);
+      setIsLoading(false);
+    }
+  };
+
+  const debounceSearch = debounce(handleSearch, 500);
+
   return (
     <Drawer>
       <DrawerTrigger>
@@ -33,8 +57,21 @@ function GlobalSearch() {
           <Input
             placeholder="Type to search blog..."
             className="bg-secondary"
+            onChange={debounceSearch}
+            disabled={isLoading}
           />
-
+          {isLoading && <Loader2 className="animate-spin mt-4 mx-auto" />}
+          {blogs.length ? (
+            <div className="text-2xl font-createRound">
+              {blogs.length} Result found.
+            </div>
+          ) : null}
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 mt-2">
+            {blogs.map((blog) => (
+              <SearchCard key={blog.slug} {...blog} />
+            ))}
+          </div>
+          {blogs.length ? <Separator className="mt-3" /> : null}
           <div className="flex flex-col space-y-2 mt-4">
             <div className="flex items-center gap-2">
               <p className="font-createRound text-2xl">
