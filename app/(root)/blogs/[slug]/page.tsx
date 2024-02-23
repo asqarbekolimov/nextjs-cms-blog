@@ -1,15 +1,4 @@
-import { Button } from "@/components/ui/button";
-import {
-  ArrowUpRight,
-  CalendarDays,
-  Clock,
-  Facebook,
-  Link2,
-  Linkedin,
-  Minus,
-  Send,
-  Twitter,
-} from "lucide-react";
+import { ArrowUpRight, CalendarDays, Clock, Minus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -17,6 +6,7 @@ import parse from "html-react-parser";
 import { getDetailBlog } from "@/service/blog.service";
 import { getReadingTime } from "@/lib/utils";
 import { format } from "date-fns";
+import ShareBtns from "../../_componets/share-btns";
 
 export async function generateMetadata({
   params,
@@ -77,23 +67,7 @@ async function SlugPage({ params }: { params: { slug: string } }) {
         <div className="flex flex-col space-y-3">
           <div className="sticky top-36">
             <p className="text-lg uppercase text-muted-foreground">Share</p>
-            <div className="flex flex-col max-md:flex-row md:space-y-3 max-md:space-x-3 mt-4">
-              <Button size={"icon"} variant={"outline"}>
-                <Twitter />
-              </Button>
-              <Button size={"icon"} variant={"outline"}>
-                <Facebook />
-              </Button>
-              <Button size={"icon"} variant={"outline"}>
-                <Linkedin />
-              </Button>
-              <Button size={"icon"} variant={"outline"}>
-                <Send />
-              </Button>
-              <Button size={"icon"} variant={"outline"}>
-                <Link2 />
-              </Button>
-            </div>
+            <ShareBtns />
           </div>
         </div>
         <div className="flex-1 prose dark:prose-invert">
