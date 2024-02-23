@@ -57,7 +57,10 @@ const BlogCard = (blog: Props) => {
 
         {/* author */}
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          <Link
+            href={`/author/${blog.author.id}`}
+            className="flex items-center gap-2"
+          >
             <Image
               src={blog.author.avatar.url}
               alt="author"
@@ -66,7 +69,7 @@ const BlogCard = (blog: Props) => {
               className="object-cover rounded-sm"
             />
             <p>by {blog.author.name}</p>
-          </div>
+          </Link>
           <Dot />
           <div className="flex items-center gap-2">
             <Link href={`/tags/${blog.tag.slug}`}>

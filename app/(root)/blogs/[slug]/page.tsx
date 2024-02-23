@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { content } from "@/constants";
 import {
   ArrowUpRight,
   CalendarDays,
@@ -19,6 +18,21 @@ import { getDetailBlog } from "@/service/blog.service";
 import { getReadingTime } from "@/lib/utils";
 import { format } from "date-fns";
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const blog = await getDetailBlog(params.slug);
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      images: blog.image.url,
+    },
+  };
+}
+
 async function SlugPage({ params }: { params: { slug: string } }) {
   const blog = await getDetailBlog(params.slug);
 
@@ -37,7 +51,7 @@ async function SlugPage({ params }: { params: { slug: string } }) {
             height={30}
             className="object-cover rounded-sm"
           />
-          <p>by Samar</p>
+          <p>by {blog.author.name}</p>
         </div>
         <Minus />
         <div className="flex items-center gap-2">

@@ -19,9 +19,26 @@ const workSan = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Dasturlashga oid maqolalar",
+  metadataBase: new URL("https://blog.asqarbekdev.uz"),
+  title: "Blog dasturlashga oid maqolalar",
   description:
     "Dasturlash haqida yangiliklar, maslahatlar, va dasturlash sohasidagi eng soʻnggi xabarlar. Bizning blogda dasturlashni oʻrganish va rivojlantirish uchun qoʻllanma topishingiz mumkin.",
+  authors: [{ name: "Asqarbek Olimov", url: "https://asqarbekdev.uz" }],
+  icons: { icon: "/favicon.png" },
+  keywords:
+    "asqarbek olimov, asqardev, dasturlash kurslari, dasturlashga oid darslar, reactjs uzbek tilida, vuejs uzbek tilida, redux uzbek tilida, sammi, sammi academy, bepul dasturlash, rezyume yozish, portfolio, sammi javascript, sammi raqamli avlod, javascript, reactjs, vuejs, javascript darslari, reactjs darslari, vuejs darslari, dasturlash darslari, o'zbek tilida dasturlash, reactjs o'zbek tilida, reactjs darslari o'zbek tilida, javascript darslari, javascript darslari o'zbek tilida, dasturash darslari o'zbek tilida, dasturlashni o'rganish, dasturlash, IT loyihalar o'zbek tilida",
+  openGraph: {
+    title: "Blog dasturlashga oid maqolalar",
+    description:
+      "Dasturlash haqida yangiliklar, maslahatlar, va dasturlash sohasidagi eng soʻnggi xabarlar. Bizning blogda dasturlashni oʻrganish va rivojlantirish uchun qoʻllanma topishingiz mumkin.",
+    type: "website",
+    url: "https://blog.asqarbekdev.uz",
+    locale: "en_EN",
+    images: "https://media.graphassets.com/kXL006lyRnW46IKTHdHs",
+    countryName: "Uzbekistan",
+    siteName: "Blog",
+    emails: "info@asqarbekdev.uz",
+  },
 };
 
 export default function RootLayout({ children }: ChildProps) {
